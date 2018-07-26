@@ -10,9 +10,29 @@ namespace VMS.TPS
 {
     public class Script
     {
-        public void Execute(ScriptContext context)
+        public void Execute(ScriptContext scriptContext, Window mainWindow)
         {
-            MessageBox.Show(context.Patient.Id);
+            Run(scriptContext.CurrentUser,
+                scriptContext.Patient,
+                scriptContext.Image,
+                scriptContext.StructureSet,
+                scriptContext.PlanSetup,
+                scriptContext.PlansInScope,
+                scriptContext.PlanSumsInScope,
+                mainWindow);
+        }
+
+        public void Run(
+            User user,
+            Patient patient,
+            Image image,
+            StructureSet structureSet,
+            PlanSetup planSetup,
+            IEnumerable<PlanSetup> planSetupsInScope,
+            IEnumerable<PlanSum> planSumsInScope,
+            Window mainWindow)
+        {
+            mainWindow.Content = patient.Id;
         }
     }
 }
