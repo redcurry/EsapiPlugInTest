@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EsapiPlugInTest;
+using EsapiPlugInTest.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +34,7 @@ namespace VMS.TPS
             IEnumerable<PlanSum> planSumsInScope,
             Window mainWindow)
         {
-            mainWindow.Content = patient.Id;
+            mainWindow.Content = AssemblySettings.ServerName;
         }
     }
 }
