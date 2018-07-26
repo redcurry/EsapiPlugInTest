@@ -10,6 +10,8 @@ namespace VMS.TPS
 {
     public class Script
     {
+        public static NLog.ILogger MyLogger = NLog.LogManager.GetLogger("MyLogger");
+
         public void Execute(ScriptContext scriptContext, Window mainWindow)
         {
             Run(scriptContext.CurrentUser,
@@ -32,7 +34,16 @@ namespace VMS.TPS
             IEnumerable<PlanSum> planSumsInScope,
             Window mainWindow)
         {
-            mainWindow.Content = patient.Id;
+            try
+            {
+                mainWindow.Content = patient.Id;
+                MyLogger.Debug($"Patient Id is {patient.Id}");
+                throw new Exception("Crazy error");
+            }
+            catch (Exception e)
+            {
+                MyLogger.Error(e, "Something bad happened");
+            }
         }
     }
 }
